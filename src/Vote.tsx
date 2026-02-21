@@ -12,7 +12,7 @@ type Voting = {
 };
 
 export default function Vote() {
-  const CONTRACT_ADDRESS = "0x6F3E12fdA30dDFFb4971CCC12089D65001b5AEC9";
+  const CONTRACT_ADDRESS = "0x5d91bD86CB6b39a9c4f7a61a2b167EbBd5728227";
   const config = useConfig();
 
   const [message, setMessage] = useState("");
