@@ -1,114 +1,69 @@
-# 🗳️ Web3 Voting DApp
+# Web3 Voting DApp
 
-A decentralized voting application built with a modern Web3 stack, focusing on smart contract design, wallet authentication, and frontend–blockchain interaction.
+A decentralized on-chain voting application built with React, TypeScript, Vite, and Wagmi, connected to a Solidity smart contract deployed on **BNB Smart Chain Testnet**.
 
-This project simulates an on-chain voting system where users connect their wallet and submit transactions directly to a deployed smart contract.
-
----
-
-## 🏗 Architecture
-
-The application is structured in layers:
-
-- Smart Contract Layer – Voting logic implemented in Solidity
-- Blockchain Layer – Deployed to a testnet environment
-- Frontend Layer – React + TypeScript interface
-- Web3 Integration Layer – Wagmi for contract interaction and state handling
-- Wallet Provider – MetaMask for authentication and transaction signing
-
-The project emphasizes clear separation between UI logic and blockchain communication.
+Users authenticate with MetaMask, inspect the active voting round (`option1`, `option2`, vote counts, and deadline), and submit votes directly on-chain.
 
 ---
 
-## 🚀 Tech Stack
+## Architecture
 
-- Solidity – Smart contract development
-- React 18 + TypeScript – Frontend
-- Vite – Build tooling
-- Wagmi – Ethereum hooks & contract integration
-- MetaMask – Wallet authentication
-- BNB Testnet (or specify the network used)
+- **Smart Contract Layer:** Voting state and `addVote` / `getCurrentVoting` logic in Solidity (`src/ABI.json`)
+- **Blockchain Network:** BNB Smart Chain Testnet (`bscTestnet` configured in `src/wagmi.ts`)
+- **Web3 Integration:** Wagmi + Viem + TanStack React Query for wallet connection and contract read/write calls
+- **Frontend Layer:** React 18 + TypeScript + Vite
 
 ---
 
-## ✨ Core Features
+## Tech Stack
 
-- Wallet connection & authentication
-- Smart contract read/write interaction
-- On-chain vote submission
-- Transaction status handling
-- Modular frontend structure
+- **Frontend:** React 18, TypeScript, Vite
+- **Web3:** Wagmi, Viem, MetaMask
+- **Network:** BNB Smart Chain Testnet (`bscTestnet`)
+- **Language:** Solidity (Smart Contract)
 
 ---
 
-## 📂 Project Structure
+## Smart Contract Details
 
+- **Network:** BNB Smart Chain Testnet
+- **Contract Address:** `0x5d91bD86CB6b39a9c4f7a61a2b167EbBd5728227`
+- **Main ABI Functions:**
+  - `getCurrentVoting()` — returns `option1`, `votes1`, `option2`, `votes2`, and `maxDate`
+  - `addVote(uint256 choice)` — records a vote for option `1` or `2`
+  - `addVoting(string option1, string option2, uint256 timeVotes)` — creates a new voting round (owner)
+  - `votes(uint256, address)` — tracks votes per round and wallet address
+
+---
+
+## Project Structure
+
+```text
 src/
- ├── ABI.json        # Smart contract ABI
- ├── wagmi.ts        # Web3 configuration
- ├── App.tsx         # Application root
- ├── Login.tsx       # Wallet connection logic
- ├── Vote.tsx        # Voting component
-
-The contract ABI is isolated to maintain contract abstraction and simplify future updates.
+├── ABI.json        # Smart contract ABI
+├── wagmi.ts        # Wagmi configuration (bscTestnet)
+├── App.tsx         # Application root (Login / Vote switch)
+├── Login.tsx       # MetaMask wallet connection
+├── Vote.tsx        # On-chain voting UI & contract read/write
+└── main.tsx        # React & Wagmi/React Query providers
+```
 
 ---
 
-## ⚙️ Local Development
+## Local Development
 
-Clone the repository:
-
-git clone https://github.com/rafaelcosta-git/your-repo.git
-
-Install dependencies:
-
+```bash
+git clone https://github.com/rafaelcosta-git/web3-voting-dapp.git
+cd web3-voting-dapp
 npm install
-
-Run the development server:
-
 npm run dev
+```
+
+Make sure MetaMask is installed and switched to **BNB Smart Chain Testnet** before casting a vote.
 
 ---
 
-## 🔗 Smart Contract
+## Author
 
-Voting logic implemented in Solidity and deployed to a test network.
-
-Contract Address:  
-(add deployed contract address here)
-
----
-
-## 🎯 Engineering Focus
-
-This project was developed with emphasis on:
-
-- Practical smart contract integration
-- Frontend–blockchain state synchronization
-- Clean code structure
-- Web3 UX patterns
-- Scalable application design
-
----
-
-## 📈 Future Improvements
-
-- Event-based vote tracking
-- Contract validation improvements
-- Gas optimization
-- Multi-network support
-- Production deployment pipeline
-
----
-
-## 👨‍💻 Author
-
-Rafael Costa  
-Full Stack Developer | Web3 Builder  
-Focused on building practical solutions with JavaScript, PHP, MySQL and Blockchain technologies.
-
----
-
-## 📜 License
-
-Educational and experimental project.
+**Rafael Costa**  
+GitHub: [@rafaelcosta-git](https://github.com/rafaelcosta-git) · LinkedIn: [Rafael Costa](https://www.linkedin.com/in/rafael-costa-950a80321)
